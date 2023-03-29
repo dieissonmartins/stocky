@@ -16,11 +16,7 @@ use Illuminate\Support\Facades\Storage;
 
 //------------------------------------------------------------------\\
 
-Route::post('/login', [
-    'uses' => 'Auth\LoginController@login',
-    'middleware' => 'Is_Active',
-]);
-
+Route::post('/login', ['uses' => 'Auth\LoginController@login', 'middleware' => 'Is_Active']);
 Route::get('password/find/{token}', 'PasswordResetController@find');
 
 //------------------------------------------------------------------\\
