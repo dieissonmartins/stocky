@@ -79,7 +79,7 @@ import NProgress from "nprogress";
 
 export default {
   metaInfo: {
-    title: "SignIn"
+    title: "Login | SCM"
   },
   data() {
     return {
