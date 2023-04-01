@@ -24,7 +24,7 @@
           >
             <router-link tag="a" class="nav-item-hold" to="/app/dashboard">
               <i class="nav-icon i-Bar-Chart"></i>
-              <span class="nav-text">{{ $t("dashboard") }} dfssdfsds</span>
+              <span class="nav-text">{{ $t("dashboard") }}</span>
             </router-link>
           </li>
           <li
