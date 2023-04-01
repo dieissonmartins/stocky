@@ -13,9 +13,6 @@
     >
       <div>
         <ul class="navigation-left">
-
-
-
           <li
             @mouseenter="toggleSubMenu"
             :class="{ active: selectedParentMenu == 'dashboard' }"
@@ -142,6 +139,7 @@
             </router-link>
           </li>
 
+            <!--
             <li
             v-show="currentUserPermissions && (currentUserPermissions.includes('company')
                      || currentUserPermissions.includes('department')
@@ -164,6 +162,7 @@
             </a>
             <div class="triangle"></div>
           </li>
+          -->
 
            <li
             v-show="currentUserPermissions && (currentUserPermissions.includes('transfer_view')
@@ -305,6 +304,7 @@
               <span class="item-name">{{$t('productsList')}}</span>
             </router-link>
           </li>
+          <!--
           <li
             class="nav-item"
             v-if="currentUserPermissions && currentUserPermissions.includes('barcode_view')"
@@ -314,6 +314,7 @@
               <span class="item-name">{{$t('Printbarcode')}}</span>
             </router-link>
           </li>
+          -->
            <li
             class="nav-item"
             v-if="currentUserPermissions && currentUserPermissions.includes('category')"
@@ -500,6 +501,7 @@
               <span class="item-name">{{$t('ListSales')}}</span>
             </router-link>
           </li>
+          <!--
           <li
             class="nav-item"
             v-if="currentUserPermissions && currentUserPermissions.includes('Pos_view')"
@@ -509,6 +511,7 @@
               <span class="item-name">POS</span>
             </router-link>
           </li>
+          -->
           <li
             class="nav-item"
             v-if="currentUserPermissions && currentUserPermissions.includes('shipment')"
@@ -675,6 +678,7 @@
             </router-link>
           </li>
 
+          <!--
           <li
             class="nav-item"
             v-if="currentUserPermissions && currentUserPermissions.includes('sms_settings')"
@@ -684,6 +688,7 @@
               <span class="item-name">{{$t('sms_settings')}}</span>
             </router-link>
           </li>
+          -->
 
            <li
             class="nav-item"
@@ -705,6 +710,7 @@
             </router-link>
           </li>
 
+          <!--
            <li
             class="nav-item"
             v-if="currentUserPermissions && currentUserPermissions.includes('payment_gateway')"
@@ -714,6 +720,7 @@
               <span class="item-name">{{$t('payment_gateway')}}</span>
             </router-link>
           </li>
+          -->
 
            <li
             class="nav-item"
@@ -752,7 +759,8 @@
               <span class="item-name">{{$t('Currencies')}}</span>
             </router-link>
           </li>
-         
+
+          <!--
           <li
             class="nav-item"
             v-if="currentUserPermissions && currentUserPermissions.includes('backup')"
@@ -762,6 +770,7 @@
               <span class="item-name">{{$t('Backup')}}</span>
             </router-link>
           </li>
+          -->
 
         </ul>
 
