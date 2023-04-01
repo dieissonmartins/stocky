@@ -1,6 +1,7 @@
- <template>
+<template>
   <div class="footer_wrap">
     <!-- Footer Start -->
+    <!--
     <div class="flex-grow-1"></div>
     <div class="app-footer">
       <div class="row">
@@ -22,20 +23,21 @@
           <span class="flex-grow-1"></span>
         </div>
       </div>
-      <!-- fotter end -->
-    </div>
+      -->
+    <!-- fotter end -->
+    <!-- </div> -->
   </div>
-</template> 
+</template>
 <script>
-import { mapGetters, mapActions } from "vuex";
+import {mapGetters, mapActions} from "vuex";
 
 export default {
   data() {
     return {};
   },
   computed: {
-     ...mapGetters([
-       "currentUser",
+    ...mapGetters([
+      "currentUser",
     ]),
   },
 

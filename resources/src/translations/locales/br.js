@@ -498,7 +498,7 @@ export default {
 
     StockManagement: 'Gestão de Estoque',
 
-    dashboard: 'Dashboard',
+    dashboard: 'Painel',
 
     Products: 'Produtos',
 

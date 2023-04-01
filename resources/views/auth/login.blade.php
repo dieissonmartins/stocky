@@ -8,22 +8,21 @@
     <link rel=icon href=/images/favicon.ico>
     <link rel="stylesheet" href="/css/master.css">
 
-    <title>Stocky | Ultimate Inventory With POS</title>
+    <title>SCM | Gestão da cadeia de suprimentos</title>
   </head>
 
   <body class="text-left">
     <noscript>
       <strong>
-        We're sorry but Stocky doesn't work properly without JavaScript
-        enabled. Please enable it to continue.</strong
-      >
+        Lamentamos, mas SCM não funciona corretamente sem JavaScript
+        habilitado. Ative-o para continuar.
+      </strong>
     </noscript>
 
     <!-- built files will be auto injected -->
     <div class="loading_wrap" id="loading_wrap">
       <div class="loader_logo">
       <img src="/images/logo.png" class="" alt="logo" />
-
       </div>
 
       <div class="loading"></div>
