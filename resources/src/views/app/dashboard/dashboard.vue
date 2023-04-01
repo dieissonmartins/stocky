@@ -431,14 +431,14 @@ export default {
             },
 
             formatter: function(params) {
-              return `${params.name}: (${params.data.value} sales) (${
+              return `${params.name}: (${params.data.value} vendas) (${
                 params.percent
               }%)`;
             },
 
             series: [
               {
-                name: "Top Customers",
+                name: "Principais clientes",
                 type: "pie",
                 radius: "50%",
                 center: "50%",
@@ -459,7 +459,7 @@ export default {
               trigger: "axis"
             },
             legend: {
-              data: ["Payment sent", "Payment received"]
+              data: ["Pagamento enviado", "Pagamento recebido"]
             },
             grid: {
               left: "3%",
@@ -482,29 +482,29 @@ export default {
             },
             series: [
               {
-                name: "Payment sent",
+                name: "Pagamento enviado",
                 type: "line",
                 data: responseData.payments.original.payment_sent
               },
               {
-                name: "Payment received",
+                name: "Pagamento recebido",
                 type: "line",
                 data: responseData.payments.original.payment_received
               }
             ]
           };
           this.echartProduct = {
-            color: ["#6D28D9", "#FA553F", "#A78BFA", "#C4B5FD", "#7C3AED"],
+            color: ["rgba(250,85,63,0.73)", "#FA553F", "rgba(250,85,63,0.42)", "#ff1f00", "#7C3AED"],
             tooltip: {
               show: true,
               backgroundColor: "rgba(0, 0, 0, .8)"
             },
             formatter: function(params) {
-              return `${params.name}: (${params.value}sales)`;
+              return `${params.name}: (${params.value} vendas)`;
             },
             series: [
               {
-                name: "Top Selling Products",
+                name: "Produtos mais vendidos",
                 type: "pie",
                 radius: "50%",
                 center: "50%",
@@ -525,7 +525,7 @@ export default {
               borderRadius: 0,
               orient: "horizontal",
               x: "right",
-              data: ["Sales", "Purchases"]
+              data: ["Vendas", "Compras"]
             },
             grid: {
               left: "8px",
@@ -590,11 +590,11 @@ export default {
 
             series: [
               {
-                name: "Sales",
+                name: "Vendas",
                 data: responseData.sales.original.data,
                 label: { show: false, color: "#FA553F" },
                 type: "bar",
-                color: "#A78BFA",
+                color: "#fa553f",
                 smooth: true,
                 itemStyle: {
                   emphasis: {
@@ -606,13 +606,13 @@ export default {
                 }
               },
               {
-                name: "Purchases",
+                name: "Compras",
                 data: responseData.purchases.original.data,
 
                 label: { show: false, color: "#0168c1" },
                 type: "bar",
                 barGap: 0,
-                color: "#DDD6FE",
+                color: "#ff8372",
                 smooth: true,
                 itemStyle: {
                   emphasis: {
