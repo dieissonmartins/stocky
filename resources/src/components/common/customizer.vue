@@ -1,17 +1,20 @@
 <template>
   <div>
     <div class="customizer" :class="{ open: isOpen }">
+
+      <!--
       <div class="handle" @click="isOpen = !isOpen">
         <i class="i-Gear spin"></i>
       </div>
+      -->
 
       <vue-perfect-scrollbar
-        :settings="{ suppressScrollX: true, wheelPropagation: false }"
-        class="customizer-body ps rtl-ps-none"
+          :settings="{ suppressScrollX: true, wheelPropagation: false }"
+          class="customizer-body ps rtl-ps-none"
       >
         <div
-          class
-          v-if="getThemeMode.layout != 'vertical-sidebar' && getThemeMode.layout != 'vertical-sidebar-two'"
+            class
+            v-if="getThemeMode.layout != 'vertical-sidebar' && getThemeMode.layout != 'vertical-sidebar-two'"
         >
           <div class="card-header" id="headingOne">
             <p class="mb-0">RTL</p>
@@ -19,7 +22,7 @@
 
           <div class="card-body">
             <label class="checkbox checkbox-primary">
-              <input type="checkbox" id="rtl-checkbox" @change="changeThemeRtl" />
+              <input type="checkbox" id="rtl-checkbox" @change="changeThemeRtl"/>
               <span>Enable RTL</span>
               <span class="checkmark"></span>
             </label>
@@ -33,19 +36,19 @@
 
           <div class="card-body">
             <label class="switch switch-primary mr-3 mt-2" v-b-popover.hover.left="'Dark Mode'">
-              <input type="checkbox" @click="changeThemeMode" />
+              <input type="checkbox" @click="changeThemeMode"/>
               <span class="slider"></span>
             </label>
           </div>
         </div>
 
-         <div class>
+        <div class>
           <div class="card-header">
             <p class="mb-0">Language</p>
           </div>
 
           <div class="card-body">
-             <div class="menu-icon-language">
+            <div class="menu-icon-language">
               <a @click="SetLocal('en')">
                 <i title="en" class="flag-icon flag-icon-squared flag-icon-gb"></i> English
               </a>
@@ -112,7 +115,7 @@
                 <i title="sa" class="flag-icon flag-icon-squared flag-icon-kr"></i>
                 <span class="title-lang">Korean</span>
               </a>
-           
+
               <a @click="SetLocal('ba')">
                 <i title="sa" class="flag-icon flag-icon-squared flag-icon-bd"></i>
                 <span class="title-lang">Bangla</span>
@@ -122,7 +125,7 @@
                 <i title="pt" class="flag-icon flag-icon-squared flag-icon-pt"></i>
                 <span class="title-lang">Portuguese</span>
               </a>
-            
+
             </div>
           </div>
         </div>
@@ -132,13 +135,13 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import {mapGetters, mapActions} from "vuex";
 
 export default {
   data() {
     return {
       isOpen: false,
-       langs: [
+      langs: [
         "en",
         "fr",
         "ar",
@@ -157,7 +160,7 @@ export default {
         "ba",
         "br",
       ],
-      
+
     };
   },
 
@@ -178,7 +181,7 @@ export default {
       this.$store.dispatch("language/setLanguage", locale);
       Fire.$emit("ChangeLanguage");
     },
-   
+
   },
 };
 </script>
