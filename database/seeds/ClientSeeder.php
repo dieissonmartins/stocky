@@ -13,20 +13,20 @@ class ClientSeeder extends Seeder
      */
     public function run()
     {
-       	// Insert some stuff
+        // Insert some stuff
         DB::table('clients')->insert(
             array(
-                'id'     => 1,
-                'name'   => 'walk-in-customer',
+                'id' => 1,
+                'name' => 'João dos Santos',
                 'code' => 1,
-                'email' => 'walk-in-customer@example.com',
-                'country' => 'bangladesh',
-                'city' => 'dhaka',
-                'phone' => '123456780',
-                'adresse' => 'N45 , Dhaka',
+                'email' => 'dieisson.martins.santos@gmail.com',
+                'country' => 'Brasil',
+                'city' => 'Belo Horizonte',
+                'phone' => '12345678',
+                'adresse' => 'Barreiro de cima',
                 'tax_number' => NULL,
             )
-            
+
         );
     }
 }

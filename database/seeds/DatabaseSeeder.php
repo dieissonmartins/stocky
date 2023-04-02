@@ -24,6 +24,6 @@ class DatabaseSeeder extends Seeder
             PermissionRoleSeeder::class,
             Warehouse::class,
         ]);
-        
+
     }
 }

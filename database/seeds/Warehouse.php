@@ -15,12 +15,12 @@ class Warehouse extends Seeder
         // Insert some stuff
         DB::table('warehouses')->insert(
             array(
-                'id'      => 1,
-                'name'    => 'Default Warehouse',
-                'city'    => NULL,
-                'mobile'  => NULL,
-                'zip'     => NULL,
-                'email'   => NULL,
+                'id' => 1,
+                'name' => 'Armazém padrão',
+                'city' => NULL,
+                'mobile' => NULL,
+                'zip' => NULL,
+                'email' => NULL,
                 'country' => NULL,
             )
         );
