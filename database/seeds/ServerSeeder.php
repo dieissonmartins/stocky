@@ -12,7 +12,7 @@ class ServerSeeder extends Seeder
      */
     public function run()
     {
-       // Insert some stuff
+        // Insert some stuff
         DB::table('servers')->insert(
             array(
                 'id' => 1,
@@ -22,7 +22,7 @@ class ServerSeeder extends Seeder
                 'password' => 'test',
                 'encryption' => 'tls',
             )
-            
+
         );
     }
 }

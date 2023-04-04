@@ -16,7 +16,7 @@ const state = {
     loading: false,
     error: null,
     notifs:0,
-    Default_Language:'en',
+    Default_Language:'br',
 };
 
 

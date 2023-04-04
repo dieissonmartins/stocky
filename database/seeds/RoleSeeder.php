@@ -15,13 +15,13 @@ class RoleSeeder extends Seeder
     public function run()
     {
         // Insert some stuff
-	    DB::table('roles')->insert(
+        DB::table('roles')->insert(
             array([
-                'id'    => 1,
-                'name'  => 'Owner',
-                'label' => 'Owner',
+                'id' => 1,
+                'name' => 'Proprietário',
+                'label' => 'Proprietário',
                 'status' => 1,
-                'description' => 'Owner',
+                'description' => 'Proprietário',
             ])
         );
     }
