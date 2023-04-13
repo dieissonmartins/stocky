@@ -22,15 +22,6 @@ Route::get('password/find/{token}', 'PasswordResetController@find');
 
 //------------------------------------------------------------------\\
 
-Route::get('/', function () {
-    $installed = true;
-    if ($installed === false) {
-        return redirect('/setup');
-    } else {
-        return redirect('/login');
-    }
-});
-
 $installed = true;
 
 if ($installed === false) {
