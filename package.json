@@ -10,7 +10,8 @@
         "production": "mix --production"
     },
     "engines": {
-        "node": "12.22.x"
+        "node": "12.22.9",
+        "npm": "8.5.1"
     },
     "dependencies": {
         "@johmun/vue-tags-input": "^2.1.0",
