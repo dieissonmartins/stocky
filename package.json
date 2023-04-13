@@ -9,10 +9,6 @@
         "prod": "npm run production",
         "production": "mix --production"
     },
-    "engines": {
-        "node": "12.22.9",
-        "yarn": "1.22.19"
-    },
     "dependencies": {
         "@johmun/vue-tags-input": "^2.1.0",
         "@pencilpix/vue2-clock-picker": "^0.1.6",

@@ -1,19 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
- */
 
 //------------------------------------------------------------------\\
 
@@ -22,129 +10,18 @@ Route::get('password/find/{token}', 'PasswordResetController@find');
 
 //------------------------------------------------------------------\\
 
-$installed = true;
-
-if ($installed === false) {
-    Route::get('/setup', [
-        'uses' => 'SetupController@viewCheck',
-    ])->name('setup');
-
-    Route::get('/setup/step-1', [
-        'uses' => 'SetupController@viewStep1',
-    ]);
-
-    Route::post('/setup/step-2', [
-        'as' => 'setupStep1', 'uses' => 'SetupController@setupStep1',
-    ]);
-
-    Route::post('/setup/testDB', [
-        'as' => 'testDB', 'uses' => 'TestDbController@testDB',
-    ]);
-
-    Route::get('/setup/step-2', [
-        'uses' => 'SetupController@viewStep2',
-    ]);
-
-    Route::get('/setup/step-3', [
-        'uses' => 'SetupController@viewStep3',
-    ]);
-
-    Route::get('/setup/finish', function () {
-
-        return view('setup.finishedSetup');
-    });
-
-    Route::get('/setup/getNewAppKey', [
-        'as' => 'getNewAppKey', 'uses' => 'SetupController@getNewAppKey',
-    ]);
-
-    Route::get('/setup/getPassport', [
-        'as' => 'getPassport', 'uses' => 'SetupController@getPassport',
-    ]);
-
-    Route::get('/setup/getMegrate', [
-        'as' => 'getMegrate', 'uses' => 'SetupController@getMegrate',
-    ]);
-
-    Route::post('/setup/step-3', [
-        'as' => 'setupStep2', 'uses' => 'SetupController@setupStep2',
-    ]);
-
-    Route::post('/setup/step-4', [
-        'as' => 'setupStep3', 'uses' => 'SetupController@setupStep3',
-    ]);
-
-    Route::post('/setup/step-5', [
-        'as' => 'setupStep4', 'uses' => 'SetupController@setupStep4',
-    ]);
-
-    Route::post('/setup/lastStep', [
-        'as' => 'lastStep', 'uses' => 'SetupController@lastStep',
-    ]);
-
-    Route::get('setup/lastStep', function () {
-        return redirect('/setup', 301);
-    });
-
-} else {
-    Route::any('/setup/{vue}', function () {
-        abort(403);
-    });
-}
-
-//------------------------------------------------------------------\\
-
 Route::group(['middleware' => ['auth', 'Is_Active']], function () {
 
     Route::get('/login', function () {
-        $installed = true;
-        if ($installed === false) {
-            return redirect('/setup');
-        } else {
-            return redirect('/login');
-        }
+        return redirect('/login');
     });
 
-
-    Route::get('/{vue?}',
-        function () {
-            $installed = true;
-
-            if ($installed === false) {
-                return redirect('/setup');
-            } else {
-                return view('layouts.master');
-            }
-        })->where('vue', '^(?!api|setup|update|password).*$');
-
-
-    });
-    
-    Auth::routes([
-        'register' => false,
-    ]);
-
-
-//------------------------------------------------------------------\\
-
-Route::group(['middleware' => ['auth', 'Is_Active']], function () {
-
-    Route::get('/update', 'UpdateController@viewStep1');
-
-    Route::get('/update/finish', function () {
-
-        return view('update.finishedUpdate');
-    });
-
-    Route::post('/update/lastStep', [
-        'as' => 'update_lastStep', 'uses' => 'UpdateController@lastStep',
-    ]);
+    Route::get('/{vue?}', function () {
+            return view('layouts.master');
+    })->where('vue', '^(?!api|setup|update|password).*$');
 
 });
 
-
-Route::get('/clear-cache', function() {
-    $exitCode = Artisan::call('cache:clear');
-    $exitCode = Artisan::call('config:cache');
-    return 'DONE'; //Return anything
-});
+Auth::routes([
+    'register' => false,
+]);
