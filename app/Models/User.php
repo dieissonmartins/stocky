@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
+
     protected $dates = ['deleted_at'];
 
     /**
@@ -40,10 +42,6 @@ class User extends Authenticatable
         'is_all_warehouses' => 'integer',
     ];
 
-    public function oauthAccessToken()
-    {
-        return $this->hasMany('\App\Models\OauthAccessToken');
-    }
 
     public function roles()
     {
@@ -68,4 +66,13 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Warehouse');
     }
 
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims(): array
+    {
+        return [];
+    }
 }

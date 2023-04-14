@@ -1,8 +1,6 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\BaseController;
-use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,17 +40,11 @@ class AuthController extends BaseController
             ]);
         }
 
-        $user = auth()->user();
-        $tokenResult = $user->createToken('Access Token');
-        $token = $tokenResult->token;
+        $token = auth()->attempt($credentials);
 
-        $this->setCookie('Stocky_token', $tokenResult->accessToken);
+        $this->setCookie('Stocky_token', $token);
 
-        return response()->json([
-            'Stocky_token' => $tokenResult->accessToken,
-            'username' => Auth::User()->username,
-            'status' => true,
-        ]);
+        return $this->respondWithToken($token);
     }
 
     //--------------- Function Logout ----------------\\
@@ -66,6 +58,23 @@ class AuthController extends BaseController
             return response()->json('success');
         }
 
+    }
+
+    /**
+     * Get the token array structure.
+     *
+     * @param string $token
+     *
+     * @return JsonResponse
+     */
+    protected function respondWithToken(string $token): JsonResponse
+    {
+        return response()->json([
+            'Stocky_token' => $token,
+            'username' => Auth::User()->username,
+            'expires_in' => auth()->factory()->getTTL() * 60,
+            'status' => true,
+        ]);
     }
 
 }
