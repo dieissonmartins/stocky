@@ -1,51 +1,39 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\BaseController;
-use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends BaseController
 {
 
-    //--------------- Function Login ----------------\\
 
-    public function getAccessToken(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function token(Request $request)
     {
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required',
-        ]);
+        # valida campos
+        $request->validate(['email' => 'required', 'password' => 'required']);
 
+        # pega informacoes
         $credentials = request(['email', 'password']);
 
-        if (Auth::attempt($credentials)) {
-            $userStatus = Auth::User()->statut;
-            if ($userStatus === 0) {
-                return response()->json([
-                    'message' => 'This user not active',
-                    'status' => 'NotActive',
-                ]);
-            }
+        $token = Auth::attempt($credentials);
 
-        } else {
+        if (!$token) {
             return response()->json([
-                'message' => 'Incorrect Login',
+                'message' => 'Login incorreto',
                 'status' => false,
             ]);
+
         }
 
-        $user = auth()->user();
-        $tokenResult = $user->createToken('Access Token');
-        $token = $tokenResult->token;
-        $this->setCookie('Stocky_token', $tokenResult->accessToken);
+        $this->setCookie('_AUTH_TOKEN', $token);
 
-        return response()->json([
-            'Stocky_token' => $tokenResult->accessToken,
-            'username' => Auth::User()->username,
-            'status' => true,
-        ]);
+        return $this->respondWithToken($token);
     }
 
     //--------------- Function Logout ----------------\\
@@ -55,10 +43,27 @@ class AuthController extends BaseController
         if (Auth::check()) {
             $user = Auth::user()->token();
             $user->revoke();
-            $this->destroyCookie('Stocky_token');
+            $this->destroyCookie('_AUTH_TOKEN');
             return response()->json('success');
         }
 
+    }
+
+    /**
+     * Get the token array structure.
+     *
+     * @param string $token
+     *
+     * @return JsonResponse
+     */
+    protected function respondWithToken(string $token): JsonResponse
+    {
+        return response()->json([
+            '_AUTH_TOKEN' => $token,
+            'username' => Auth::User()->username,
+            'expires_in' => auth()->factory()->getTTL() * 60,
+            'status' => true,
+        ]);
     }
 
 }

@@ -1,3 +1,6 @@
 chmod +x *.sh
 
 ln -s ./public ./html
+
+
+jwt-auth secret [gCpQhafcG45ptboPzE4h6EUC6y3R0EPdEliGQL1n0tfOgQcAphws7enJliqbPULW] set successfully.
