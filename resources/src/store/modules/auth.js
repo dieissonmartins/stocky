@@ -94,7 +94,7 @@ const actions = {
             context.commit('setallmodules', null)
             context.commit('setUser', null)
             context.commit('Notifs_alert', null)
-            context.commit('SetDefaultLanguage', 'en')
+            context.commit('SetDefaultLanguage', 'br')
         });
     },
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -9,24 +10,28 @@ use \Nwidart\Modules\Facades\Module;
 class BaseController extends Controller
 {
 
-    public function sendResponse($result,$msg){
-        $response=[
-            'success'=>true,
-            'message'=>$msg,
+    private $domain = 'tccpucminaseng.herokuapp.com';
+
+    public function sendResponse($result, $msg)
+    {
+        $response = [
+            'success' => true,
+            'message' => $msg,
         ];
-        if(!empty($result)){
-            $response['data']=$result;
+        if (!empty($result)) {
+            $response['data'] = $result;
         }
         return response()->json($response, 200);
     }
 
-    public function sendError($error_msg, $error=null){
-        $response=[
-            'success'=>false,
-            'message'=>$error_msg,
+    public function sendError($error_msg, $error = null)
+    {
+        $response = [
+            'success' => false,
+            'message' => $error_msg,
         ];
-        if(isset($error)){
-            $response['errors']= $error;
+        if (isset($error)) {
+            $response['errors'] = $error;
         }
 
         return response()->json($response, 400);
@@ -35,9 +40,17 @@ class BaseController extends Controller
     //    Set cookie
     public function setCookie($cookie_name, $cookie_value)
     {
-        $domain = ($_SERVER['SERVER_NAME'] != 'localhost') ? $_SERVER['SERVER_NAME'] : '.'.$_SERVER['SERVER_NAME'];
+        if ($_ENV['APP_ENV'] === 'local') {
+            $domain = 'localhost';
+        } else {
+            $domain = 'tccpucminaseng.herokuapp.com';
+        }
+
+        #$domain = ($_SERVER['SERVER_NAME'] != 'localhost') ? $_SERVER['SERVER_NAME'] : '.'.$_SERVER['SERVER_NAME'];
+
         $this->destroyCookie($cookie_name);
-        setcookie($cookie_name, $cookie_value, time() + 2147483647, '/', $domain); 
+
+        setcookie($cookie_name, $cookie_value, time() + 2147483647, '/', $domain);
     }
 
     // Get cookie
@@ -49,8 +62,19 @@ class BaseController extends Controller
             return false;
         }
     }
+
     // Has cookie
     public function hasCookie($cookie_name)
+    {
+        if (isset($_COOKIE[$cookie_name])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Has cookie
+    public static function hasCookieByRoute($cookie_name)
     {
         if (isset($_COOKIE[$cookie_name])) {
             return true;
@@ -62,10 +86,12 @@ class BaseController extends Controller
     // Destroy cookie
     public function destroyCookie($cookie_name)
     {
-        $domain = ($_SERVER['SERVER_NAME'] != 'localhost') ? $_SERVER['SERVER_NAME'] : '.'.$_SERVER['SERVER_NAME'];
+        #$domain = ($_SERVER['SERVER_NAME'] != 'localhost') ? $_SERVER['SERVER_NAME'] : '.' . $_SERVER['SERVER_NAME'];
+        $domain = $this->domain;
+
         if (isset($_COOKIE[$cookie_name])) {
             unset($_COOKIE[$cookie_name]);
-            setcookie($cookie_name, '', time() - 2147483647, '/',  $domain);
+            setcookie($cookie_name, '', time() - 2147483647, '/', $domain);
 
         }
     }
@@ -73,10 +99,12 @@ class BaseController extends Controller
     // Clear cookie
     public function clearCookie()
     {
-        $domain = ($_SERVER['SERVER_NAME'] != 'localhost') ? $_SERVER['SERVER_NAME'] : '.'.$_SERVER['SERVER_NAME'];
-        if (isset($_COOKIE['Stocky_token'])) {
-            unset($_COOKIE['Stocky_token']);
-            setcookie('Stocky_token', '', time() - 2147483647, '/', $domain); // empty value and old timestamp
+        #$domain = ($_SERVER['SERVER_NAME'] != 'localhost') ? $_SERVER['SERVER_NAME'] : '.' . $_SERVER['SERVER_NAME'];
+        $domain = $this->domain;
+
+        if (isset($_COOKIE['_AUTH_TOKEN'])) {
+            unset($_COOKIE['_AUTH_TOKEN']);
+            setcookie('_AUTH_TOKEN', '', time() - 2147483647, '/', $domain); // empty value and old timestamp
         }
     }
 
@@ -118,17 +146,17 @@ class BaseController extends Controller
         $ModulesInstalled = [];
         $ModulesEnabled = [];
 
-        foreach($allModules as $key => $modules_name){
+        foreach ($allModules as $key => $modules_name) {
             $ModulesInstalled[] = $key;
         }
 
-        foreach($allEnabledModules as $key => $modules_name){
+        foreach ($allEnabledModules as $key => $modules_name) {
             $ModulesEnabled[] = $key;
         }
 
         return [
-            'ModulesInstalled' => $ModulesInstalled, 
-            'ModulesEnabled' => $ModulesEnabled, 
+            'ModulesInstalled' => $ModulesInstalled,
+            'ModulesEnabled' => $ModulesEnabled,
         ];
     }
 
