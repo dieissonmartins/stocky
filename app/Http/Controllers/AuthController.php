@@ -21,26 +21,15 @@ class AuthController extends BaseController
         # pega informacoes
         $credentials = request(['email', 'password']);
 
-        $is_exists = Auth::attempt($credentials);
+        $token = Auth::attempt($credentials);
 
-        if ($is_exists) {
-            $userStatus = Auth::User()->statut;
-
-            if ($userStatus === 0) {
-                return response()->json([
-                    'message' => 'Este usuário não está ativo',
-                    'status' => 'NotActive',
-                ]);
-            }
-
-        } else {
+        if (!$token) {
             return response()->json([
                 'message' => 'Login incorreto',
                 'status' => false,
             ]);
-        }
 
-        $token = auth()->attempt($credentials);
+        }
 
         $this->setCookie('_AUTH_TOKEN', $token);
 

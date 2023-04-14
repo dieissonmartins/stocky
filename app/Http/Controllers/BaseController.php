@@ -40,7 +40,7 @@ class BaseController extends Controller
     //    Set cookie
     public function setCookie($cookie_name, $cookie_value)
     {
-        if (env('APP_ENV') !== 'local') {
+        if ($_ENV['APP_ENV'] === 'local') {
             $domain = 'localhost';
         } else {
             $domain = 'tccpucminaseng.herokuapp.com';
