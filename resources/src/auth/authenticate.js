@@ -4,7 +4,7 @@ Vue.use(VueCookies);
 
 export default (to, from, next) => {
 
-  let accessToken = VueCookies.isKey("Stocky_token");
+  let accessToken = VueCookies.isKey("_AUTH_TOKEN");
 
   if (!accessToken) {
     next("/app/sessions/signIn");
