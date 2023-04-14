@@ -32,15 +32,15 @@ Vue.use(Meta, {
 });
 
 localize({
-  en: {
+  br: {
     messages: {
-      required: 'This field is required',
-      required_if: 'This field is required',
-      regex: 'This field must be a valid',
-      mimes: `This field must have a valid file type.`,
-      size: (_, { size }) => `This field size must be less than ${size}.`,
-      min: 'This field must have no less than {length} characters',
-      max: (_, { length }) => `This field must have no more than ${length} characters`
+      required: 'Este campo é obrigatório',
+      required_if: 'Este campo é obrigatório',
+      regex: 'Este campo deve ser válido',
+      mimes: `Este campo deve ter um tipo de arquivo válido.`,
+      size: (_, { size }) => `Este tamanho de campo deve ser menor que ${size}.`,
+      min: 'Este campo não deve ter menos que {length} personagens',
+      max: (_, { length }) => `Este campo deve ter no máximo ${length} palavras`
     }
   },
 });

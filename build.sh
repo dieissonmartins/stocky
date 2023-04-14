@@ -1,1 +1,3 @@
-sudo yarn run dev
+sudo yarn install
+
+sudo yarn run development
