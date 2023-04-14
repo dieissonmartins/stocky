@@ -76,7 +76,7 @@ class Handler extends ExceptionHandler
         // protected function unauthenticated($request, AuthenticationException $exception)
         // {
         //     if ($request->expectsJson()) {
-        //         $this->destroyCookie('Stocky_token');
+        //         $this->destroyCookie('_AUTH_TOKEN');
 
         //         return response()->json([
         //             'message' => 'Unauthenticated.',

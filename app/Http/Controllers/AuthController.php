@@ -13,7 +13,7 @@ class AuthController extends BaseController
      * @param Request $request
      * @return JsonResponse
      */
-    public function getAccessToken(Request $request)
+    public function token(Request $request)
     {
         # valida campos
         $request->validate(['email' => 'required', 'password' => 'required']);
@@ -42,7 +42,7 @@ class AuthController extends BaseController
 
         $token = auth()->attempt($credentials);
 
-        $this->setCookie('Stocky_token', $token);
+        $this->setCookie('_AUTH_TOKEN', $token);
 
         return $this->respondWithToken($token);
     }
@@ -54,7 +54,7 @@ class AuthController extends BaseController
         if (Auth::check()) {
             $user = Auth::user()->token();
             $user->revoke();
-            $this->destroyCookie('Stocky_token');
+            $this->destroyCookie('_AUTH_TOKEN');
             return response()->json('success');
         }
 
@@ -70,7 +70,7 @@ class AuthController extends BaseController
     protected function respondWithToken(string $token): JsonResponse
     {
         return response()->json([
-            'Stocky_token' => $token,
+            '_AUTH_TOKEN' => $token,
             'username' => Auth::User()->username,
             'expires_in' => auth()->factory()->getTTL() * 60,
             'status' => true,
