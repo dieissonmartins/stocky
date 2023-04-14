@@ -91,7 +91,7 @@ const actions = {
             context.commit('SetDefaultLanguage', default_language)
         }).catch(() => {
             context.commit('setPermissions', null)
-            context.commit('setallmodules', '')
+            context.commit('setallmodules', null)
             context.commit('setUser', null)
             context.commit('Notifs_alert', null)
             context.commit('SetDefaultLanguage', 'br')

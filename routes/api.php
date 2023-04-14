@@ -16,7 +16,7 @@ Route::group(['prefix' => 'password',], function () {
     Route::post('reset', 'PasswordResetController@reset');
 });
 
-Route::post('/getAccessToken', [AuthController::class, 'getAccessToken']);
+Route::post('/getAccessToken', [AuthController::class, 'token']);
 Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
     Route::get('/dashboard_data', [DashboardController::class, 'dashboard_data']);
