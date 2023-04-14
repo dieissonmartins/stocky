@@ -3,35 +3,41 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\BaseController;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends BaseController
 {
 
-    //--------------- Function Login ----------------\\
 
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function getAccessToken(Request $request)
     {
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required',
-        ]);
+        # valida campos
+        $request->validate(['email' => 'required', 'password' => 'required']);
 
+        # pega informacoes
         $credentials = request(['email', 'password']);
 
-        if (Auth::attempt($credentials)) {
+        $is_exists = Auth::attempt($credentials);
+
+        if ($is_exists) {
             $userStatus = Auth::User()->statut;
+
             if ($userStatus === 0) {
                 return response()->json([
-                    'message' => 'This user not active',
+                    'message' => 'Este usuário não está ativo',
                     'status' => 'NotActive',
                 ]);
             }
 
         } else {
             return response()->json([
-                'message' => 'Incorrect Login',
+                'message' => 'Login incorreto',
                 'status' => false,
             ]);
         }
@@ -39,6 +45,7 @@ class AuthController extends BaseController
         $user = auth()->user();
         $tokenResult = $user->createToken('Access Token');
         $token = $tokenResult->token;
+
         $this->setCookie('Stocky_token', $tokenResult->accessToken);
 
         return response()->json([
