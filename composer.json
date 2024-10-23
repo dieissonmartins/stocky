@@ -8,7 +8,7 @@
   ],
   "license": "MIT",
   "require": {
-    "php": "8.2.19",
+    "php": "8.2.24",
     "ext-bcmath": "*",
     "barryvdh/laravel-dompdf": "^0.9.0",
     "doctrine/dbal": "2.*",
